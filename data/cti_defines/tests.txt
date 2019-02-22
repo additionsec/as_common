@@ -1,0 +1,109 @@
+# number <tab> short <tab> description <\n>
+
+# General info tests
+1	SystemHardwareInfo	System hardware information
+2	SystemFirmwareInfo	System firmware information
+3	SystemOSInfo	System operating system information
+4	ApplicationInfo	Application information
+5	StorageInfo	Storage information
+6	SensorInfo	Sensor information
+7	BatteryInfo	Battery information
+8	SDKVersionInfo	SDK version information
+10	NetworkWifiInfo	Network WiFi information
+11	NetworkInfo	Network information
+12	NetworkGWDNSInfo	Network gateway and DNS information
+13	WifiLocationScan	WiFi based location scan data
+14	InternalOOM	Internal notice of out of memory/malloc failure
+
+20	MessageSent	Message successfully delivered to gateway
+21	MessageDelayed	Error/network not ready to send message to gateway
+22	GatewayPinged	Successful ping to gateway
+23	GatewayPingDelayed	Error/network not ready to ping gateway
+24	ElevatedMonitoring	Elevated monitoring mode enabled
+25	ProxyConfigured	Device/application is using a proxy configuration
+
+40	SystemIDChanged	The provided system ID has changed
+
+50	InitializationComplete	Library initialization is complete
+51	CustomerMessage	Library Send_Message API call
+52	IdentityRegistration	Library Register_Identity API call
+53	LoginSuccessful	Library Login_Status API call
+54	LoginUnsuccessful	Library Login_Status API call
+55	BackgroundMonitoringDisabled	Configuration disabled background monitoring
+
+97	SigningKey	Key used to sign Addition Security components
+98	NonProdKeys	Non-production signing keys being used in config
+99	FDC	Field Data Collection
+
+# Compliance tests
+100	AntivirusInstalled	Antivirus app installed
+101	AntivirusNotInstalled	Antivirus app not installed
+102	AntivirusRequirement	Required Antivirus app not installed
+103	AntivirusDisabled	Antivirus app is disabled
+105	EMMInstalled	EMM management app installed
+106	EMMRequirement	Required EMM management app not installed
+107	EMMDisabled	EMM management app is disabled
+110	CorporateRequirement	Required corporate app not installed
+111	CorporateDisabled	Corporate app is disabled
+
+# Malware/AV tests
+150	KnownMalwareArtifactDetected	Malware artifact detected
+151	PublicStolenCertSignerPresent	An application with a public or stolen certificate is present
+152	KnownMalwareSignerPresent	An application is signed by a known malware signer
+153	PossibleApplicationPhishing	An application label may indicate a fake/trojan application
+154	ExpectedSignerFailure	An appplication is not signed by expected signer
+
+
+# General security tests
+250	OpenSystemLocalAttackVector	System has open local attack vector
+251	OpenSystemRemoteAttackVector	System has open remote attack vector
+252	OpenApplicationLocalAttackVector	Application has open local attack vector
+253	OpenApplicationRemoteAttackVector	Application has open remote attack vector
+
+# System security test
+300	SyntheticSystemArtifact	System hardware is synthentic (emulator/simulator)
+301	SystemAdministrationEntity	System administrationn/management entity
+302	NonProductionSystemArtifact	System is test/non-production
+305	PrivilegeProvidingApplicationInstalled	Application provides privileged operation
+306	PrivilegeRequiringApplicationInstalled	Application requires privileged operation
+307	HackingToolInstalled	Known hacking/security tool installed
+308	SecuritySubversionToolInstalled	Known security subversion tool installed
+309	ApplicationTamperingToolInstalled	Known application tampering tool installed
+310	GameCheatToolInstalled	Known game cheating tool installed
+311	AppPurchasingFraudToolInstalled	Known app purchasing fraud tool installed
+312	TestAutomationToolInstalled	A test or automation tool is installed
+313	SecurityExpectationFailure	The system is not meeting security expectations
+314	SystemRootJailbreak	The system is rooted/jailbroken
+315	SecurityHidingToolInstalled	Known security/root hiding tool installed
+316	SystemSigner	Signer of the system software
+317	SystemUnsigned	The system software is not signed
+318	ADBDRunning	Android ADB daemon is running
+319	DevelopmentArtifact	A development artifact was encountered
+
+# Application security test
+400	DebugInstrumentationArtifact	A debugger/instrumentation artifact was detected
+401	ApplicationTamperingDetected	An integrity issue was identified in the running application
+402	ApplicationUnencrypted	The application is unencrypted
+403	ApplicationEncryptionDisabled	The application encryption is disabled
+404	ApplicationSigner	The signer of the application
+405	ApplicationUnsigned	The application is not signed
+406	StealthCallbackFailure	Failed to call the defined stealth callbacks
+407	ApplicationMeasurement	Integrity hash of an application component
+408	ProvisioningSigner	The signer of the provisioning component
+409	ProvisioningMissing	Provisioning component missing or sideloaded
+410	ProvisioningCorrupted	The provisioning data is corrupted
+411	SecurityOperationFailed	A system operation failed during a security check
+412	StealthCallbackTimeout	The stealth callback timed out
+413	ApplicationDeveloperSigned	Application is used dev/debug signer
+414	DebugBuild	This is a debug build of the application
+415	ProvisioningProvider	The name of the provisioning/store/installer
+416	HeartbeatFailure	Heartbeat received the wrong input
+417	ArmOnX86	ARM emulation on x86 device
+418	InternalHookingDetected	Internal hooking detected
+
+
+# Network security test
+500	SSLPinViolation	An expected SSL/TLS certificate did not match expected pin
+501	MITMDetected	A man-in-the-middle entity was detected
+502	SSLPinViolationCertificate	The X509 certificate associated with an SSL pinning violation
+503	PortScanDetected	A port scan was detected

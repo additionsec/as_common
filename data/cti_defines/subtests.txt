@@ -1,0 +1,65 @@
+# test \t subtest \t desc
+
+# AppTamperingDetected = 401
+401	1	Internal SDK integrity violation
+401	2	As.defs file signature violation
+401	3	As.conf file signature violation
+401	4	Queued messages file integrity violation
+401	48	Codesign data is corrupted/invalid
+
+# SystemRootJailbreak = 314
+# SecurityExcpectationFailure = 313
+# ApplicationTamperingTool = 309
+# HackingTool = 307
+# SecuritySubverstionTOol = 308
+# SecurityHidingTool = 315
+# DebugInstrumentationArtifact = 400
+314,313	7	General root/jailbroken file
+314	8	Cydia
+314,309	9	Substrate
+314,309	10	Cycrypt
+314	11	Root-needing application artifact
+314,307	12	Clutch
+314,308,313	14	Jailbreaking tool/artifact
+309	15	Application tampering tool/artifact
+314,308	16	Pangu
+314,308	17	Taig
+314,308	18	evasi0n
+314,309,315	19	xcon
+314,308	20	blackr4in
+314,309	21	Introspy
+314,309	22	SSLKillSwitch
+314,309	23	iSpy
+309	24	Snoopit
+400	25	PonyDebugger
+309	26	Frida
+314,400	30	GDB
+314,400	31	General debug tool artifact
+309	32	Flex
+400	33	Xtrace
+309	34	Beagle
+400	35	Debugger active (kernel flag)
+313	36	ASLR disabled
+400	37	Debugger active (exception flags)
+400	41	Dyld environment variable
+313	43	UID/GID discrepency
+313	44	Kernel security.mac.proc_enforce
+313	45	Kernel security.mac.vnode_enforce
+313	46	Codesign enforcement disabled
+400	47	Get-task-allow entitlement
+
+# KnownMalwareArtifact = 150
+150	13	General malware artifact
+150	28	Ikee virus
+150	29	Unflod virus
+
+# ApplicationMeasurement = 407
+407	1	Application file
+407	2	Mach-o headers
+407	3	Executable memory image
+
+# MITMDetected = 501
+501	1	Burp
+501	2	Charles
+501	3	Fiddler
+501	4	WebScarab

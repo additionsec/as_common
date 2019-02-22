@@ -1,0 +1,4 @@
+Report.organizationId	max_size:32
+Report.systemId		max_size:32
+Report.applicationId	max_size:128
+Report.userId		max_size:32

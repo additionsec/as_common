@@ -1,0 +1,166 @@
+// Copyright 2019 J Forristal LLC
+// Copyright 2016 Addition Security Inc.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//    http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+option java_package = "com.additionsecurity.cti";
+option optimize_for = SPEED;
+option java_generic_services = false;
+
+message ObservationData {
+	enum DataType {
+		DataTypeUnknown = 0;
+
+		DataTypeHashMD5 = 1;
+		DataTypeHashSHA1 = 2;
+		DataTypeHashSHA256 = 3;
+		DataTypeHashAS1 = 4;
+		DataTypeHashAS2 = 5;
+		DataTypeCVE = 6;
+		DataTypeVersionString = 7;
+		DataTypeModelString = 8;
+		DataTypeASLibVersion = 9;
+
+		DataTypeFile = 10;
+		DataTypeX509 = 11;
+		DataTypeX509Subject = 12;
+		DataTypeX509Issuer = 13;
+		DataTypeUsername = 14;
+		DataTypeProcess = 15;
+		DataTypeCommand = 16;
+		DataTypeApplication = 17;
+		DataTypeString = 18;
+		DataTypeNumber = 19;
+
+		DataTypeIPv4 = 20;
+		DataTypeIPv6 = 21; // NOTE: currently unsupported by gateway
+		DataTypePort = 22;
+		DataTypeHostname = 23;
+		DataTypeMAC = 24;
+
+		DataTypeASConfTimestamp = 25;
+		DataTypeASDefVersion = 26;
+		DataTypeHPKP = 27;
+		DataTypeVendorRefID = 28;
+		DataTypeEnvString = 29;
+		DataTypeSymbolString = 30;
+		DataTypePropertyName = 31;
+		DataTypeLibrary = 32;
+
+		DataTypeSSID = 33;
+		DataTypeBSSID = 34;
+
+		DataTypeSystemID = 35;
+		DataTypeNativePointer = 36;
+		DataTypeNativeInt = 37;
+		DataTypeRawBinary = 38;
+	}
+
+	// PERFORMANCE NOTE: Profiling our high-perf Java gateway indicates significant
+	// time is spent to convert an int into an enum value, just to take it and
+	// convert it back to an int.  So while this would normally be a typesafe enum,
+	// we are just going to use an int aligned to the above values for significant
+	// performance gains.  It also future-proofs an existing gateway, which may
+	// encounter future datatypes that it doesn't know about -- for an enum,
+	// it will throw an exception.  For an int, we can overwrite it back to 0
+	// if it exceeds the known max.
+	//
+	// It also helps our test tools, who need to generate values outside the valid
+	// range for receiver testing & validation.
+	//
+	// You can choose enum or int as appropriate for your implementation, in only
+	// affects serializer validation.  Data on the wire is the same regardless.
+
+	//optional DataType dataType = 1 [ default = DataTypeUnknown ];
+	optional uint32 dataType = 1 [ default = 0 ];
+
+	optional bytes data = 2;
+	optional uint32 num = 3;
+}
+
+message Sighting {
+
+	enum SightingType {
+		SightingTypeUnknown = 0;
+		SightingTypeInformational = 1;
+		SightingTypeSystemCharacteristics = 2;
+		SightingTypeApplicationCharacteristics = 3;
+		SightingTypeMalwareArtifacts = 4;
+		SightingTypeNetworkAttack = 5;
+		SightingTypeUserBehavior = 6;
+		SightingTypeCompliance = 7;
+		SightingTypeCustomerData = 8;
+	}
+
+	// See above note about enum vs int.
+	//optional SightingType sightingType = 1 [ default = SightingTypeUnknown ];
+	optional uint32 sightingType = 1 [ default = 0 ];
+
+	optional uint32 timestamp = 2;
+	optional uint32 timeDelta = 8;
+
+	enum SightingConfidence {
+		SightingConfidenceUnknown = 0;
+		SightingConfidenceLow = 1;
+		SightingConfidenceMedium = 2;
+		SightingConfidenceHigh = 3;
+	}
+
+	// See above note about enum vs int.
+	//optional SightingConfidence confidence = 3 [ default = SightingConfidenceUnknown ];
+	optional uint32 confidence = 3 [ default = 0 ];
+
+	repeated ObservationData datas = 5;
+	optional uint32 testId = 6;
+	optional uint32 testSubId = 7;
+}
+
+message Report {
+
+	optional bytes organizationId = 1;
+
+	optional bytes systemId = 2;
+	optional bytes systemIdSecondary = 3;
+
+	enum SystemType {
+		SystemTypeUnknown = 0;
+		SystemTypeIOS = 1;
+		SystemTypeAndroid = 2;
+		SystemTypeWindowsMobile = 3;
+		SystemTypeBlackberry = 4;
+		SystemTypeAmazonMobile = 5;
+		SystemTypeOSX = 6;
+		SystemTypeLinux = 7;
+		SystemTypeWindows = 8;
+		SystemTypeBSD = 9;
+		SystemTypeEmbeddedLinux = 10;
+		SystemTypeIOT = 11;
+		SystemTypeNetworkDevice = 12;
+	}
+
+	// See above note about enum vs int.
+	//optional SystemType systemType = 4 [ default = SystemTypeUnknown ];
+	optional uint32 systemType = 4 [ default = 0 ];
+
+	optional bytes applicationId = 5;
+
+	optional bytes userId = 6;
+	optional bytes userIdSecondary = 7;
+
+	repeated Sighting sightings = 8;
+
+	optional uint32 timeBase = 9;
+
+	// For parsing performance reasons, this uint32 is encoded as 4 bytes:
+	optional bytes version = 10;
+}
